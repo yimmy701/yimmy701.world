@@ -5,21 +5,36 @@
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yimmy</title>
 <style>
-  /* 这里是CSS，负责"长什么样"。HTML负责"有什么内容"，CSS负责"样子"。 */
-
   body {
     margin: 0;
     min-height: 100vh;
     font-family: sans-serif;
-    color: white; 
-    background-color: #291524; /* 默认背景色，之后会被取色器实时改掉 */
-    transition: background-color 0.2s ease; /* 换颜色的时候有个平滑过渡，不是硬切 */
+    color: white;
+    background-color: #291524;
+    transition: background-color 0.2s ease;
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 20px 28px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  nav a:hover {
+    opacity: 0.7;
   }
 
   main {
     max-width: 640px;
     margin: 0 auto;
-    padding: 12vh 28px;
+    padding: 8vh 28px;
     text-align: center;
   }
 
@@ -34,44 +49,26 @@
   }
 
   img {
-    max-width: 100%;    /* 图片不会超出容器宽度，手机上也不会溢出 */
-    border-radius: 4px; /* 可选，圆角，不要也行 */
+    max-width: 100%;
+    border-radius: 4px;
   }
-  
-  nav {
-  display: flex;
-  gap: 24px;
-  padding: 20px 28px;
-  }
-
-  nav a {
-    color: white;
-    text-decoration: none;   /* 去掉链接默认的下划线 */
-    font-size: 0.95rem;
-  }
-  
-  nav a:hover {
-    opacity: 0.7;   /* 鼠标移上去的时候有点反馈，不是死气沉沉的 */
-  }
-    
 </style>
 </head>
 <body>
-  
+
   <nav>
     <a href="index.html">Home</a>
-    <a href="***.html">✨</a>
+    <a href="sparkle.html">✨</a>
   </nav>
-  
+
   <main>
-  
+
     <img src="IMG_1544.JPG" alt="嘻嘻">
-    
-    <!-- 下面这两块才是你真正的网站内容，自己改这里的文字就行 -->
+
     <p>Yimmy701</p>
     <p>studio</p>
-    <a href="***.html">✨</a>
-  
+
   </main>
+
 </body>
 </html>
