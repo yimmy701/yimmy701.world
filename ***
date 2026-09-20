@@ -34,6 +34,22 @@
   a {
     color: white;
   }
+
+  nav {
+  display: flex;
+  gap: 24px;
+  padding: 20px 28px;
+  }
+  
+  nav a {
+    color: white;
+    text-decoration: none;   /* 去掉链接默认的下划线 */
+    font-size: 0.95rem;
+  }
+  
+  nav a:hover {
+    opacity: 0.7;   /* 鼠标移上去的时候有点反馈，不是死气沉沉的 */
+  }
 </style>
 </head>
 <body>
