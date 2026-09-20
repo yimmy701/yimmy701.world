@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Yimmy — Progress</title>
+<link rel="icon" type="image/png" href="logo.jpg">
+<style>
+  body {
+    margin: 0;
+    min-height: 100vh;
+    font-family: sans-serif;
+    color: white;
+    background-color: #291524;
+    transition: background-color 0.2s ease;
+  }
+
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 20px 28px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  nav a:hover {
+    opacity: 0.7;
+  }
+
+  main {
+    max-width: 640px;
+    margin: 0 auto;
+    padding: 8vh 28px;
+  }
+
+  h1 {
+    font-size: 2.2rem;
+    margin-bottom: 2rem;
+    text-align: center;
+  }
+
+  /* 表单部分的样式 */
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    margin-bottom: 4rem;
+    padding-bottom: 3rem;
+    border-bottom: 1px solid rgba(255,255,255,0.2);
+  }
+
+  input, textarea {
+    font-family: sans-serif;
+    font-size: 1rem;
+    padding: 10px 12px;
+    border-radius: 6px;
+    border: 1px solid rgba(255,255,255,0.3);
+    background-color: rgba(255,255,255,0.05);
+    color: white;
+  }
+
+  textarea {
+    min-height: 80px;
+    resize: vertical;
+  }
+
+  button {
+    font-family: sans-serif;
+    font-size: 1rem;
+    padding: 10px 16px;
+    border-radius: 6px;
+    border: none;
+    background-color: white;
+    color: #291524;
+    cursor: pointer;
+  }
+
+  button:hover {
+    opacity: 0.85;
+  }
+
+  #status {
+    font-size: 0.9rem;
+    min-height: 1.2em;
+  }
+
+  /* 历史记录列表的样式 */
+  .entry {
+    margin-bottom: 1.6rem;
+  }
+
+  .entry-date {
+    font-size: 0.85rem;
+    opacity: 0.6;
+    margin-bottom: 4px;
+  }
+
+  .entry-content {
+    font-size: 1.05rem;
+    line-height: 1.5;
+  }
+</style>
+</head>
+<body>
+
+  <script src="nav.js"></script>
+
+  <main>
+
+    <h1>Progress Log</h1>
+
+    <!-- 提交新记录的表单 -->
+    <form id="progressForm">
+      <input type="date" id="dateInput" required>
+      <textarea id="contentInput" placeholder="今天做了什么..." required></textarea>
+      <button type="submit">Add entry</button>
+      <div id="status"></div>
+    </form>
+
+    <!-- 历史记录会被JS自动插入到这里 -->
+    <div id="entryList">加载中...</div>
+
+  </main>
+
+<script>
+  // 这两个要跟你Apps Script里的完全对应
+  const SCRIPT_URL = "https://script.google.com/macros/s/AKfycbwYM0JE_InQxEfyscj5o97vs1XaN87QMwgzNoeKsOQri2T0HwpG4sidq_eR0ojhrcpS/exec";
+  const SECRET_KEY = "yimmy701 studio";
+
+  const form = document.getElementById('progressForm');
+  const status = document.getElementById('status');
+  const entryList = document.getElementById('entryList');
+
+  // 提交表单：把数据POST到Apps Script
+  form.addEventListener('submit', function (e) {
+    e.preventDefault(); // 阻止表单默认的"刷新页面"行为
+
+    const date = document.getElementById('dateInput').value;
+    const content = document.getElementById('contentInput').value;
+
+    status.textContent = "提交中...";
+
+    fetch(SCRIPT_URL, {
+      method: 'POST',
+      body: JSON.stringify({ date: date, content: content, key: SECRET_KEY })
+    })
+      .then(function () {
+        status.textContent = "已添加 ✓";
+        form.reset();
+        loadEntries(); // 提交成功后，重新拉取一次最新列表
+      })
+      .catch(function () {
+        status.textContent = "提交失败，再试一次";
+      });
+  });
+
+  // 读取所有记录，渲染成列表
+  function loadEntries() {
+    fetch(SCRIPT_URL)
+      .then(function (res) { return res.json(); })
+      .then(function (entries) {
+        if (entries.length === 0) {
+          entryList.innerHTML = "<p>还没有记录。</p>";
+          return;
+        }
+
+        // 按日期新的在前
+        entries.reverse();
+
+        entryList.innerHTML = entries.map(function (entry) {
+          return '<div class="entry">' +
+                   '<div class="entry-date">' + entry.date + '</div>' +
+                   '<div class="entry-content">' + entry.content + '</div>' +
+                 '</div>';
+        }).join('');
+      })
+      .catch(function () {
+        entryList.innerHTML = "<p>加载失败，刷新试试。</p>";
+      });
+  }
+
+  loadEntries(); // 页面一打开就自动加载一次
+</script>
+
+</body>
+</html>
