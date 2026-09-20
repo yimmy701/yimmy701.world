@@ -4,152 +4,88 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Yimmy</title>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,400;0,9..144,500;1,9..144,400&family=Inter:wght@400;500&display=swap" rel="stylesheet">
 <style>
-  :root{
-    --paper: #ECEAE2;
-    --ink: #1C1B19;
-    --blueprint: #2D4A6B;
-    --rule: #B9B4A5;
-    --rule-faint: rgba(45,74,107,0.08);
-  }
+  /* 这里是CSS，负责"长什么样"。HTML负责"有什么内容"，CSS负责"样子"。 */
 
-  *{ box-sizing: border-box; }
-
-  html{ scroll-padding-top: env(safe-area-inset-top, 0px); }
-
-  body{
+  body {
     margin: 0;
-    background:
-      linear-gradient(var(--rule-faint) 1px, transparent 1px) 0 0/100% 32px,
-      linear-gradient(90deg, var(--rule-faint) 1px, transparent 1px) 0 0/32px 100%,
-      var(--paper);
-    color: var(--ink);
-    font-family: 'Inter', system-ui, sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
     min-height: 100vh;
-    padding-top: env(safe-area-inset-top, 0px);
-    padding-bottom: env(safe-area-inset-bottom, 0px);
+    font-family: sans-serif;
+    background-color: #ECEAE2; /* 默认背景色，之后会被取色器实时改掉 */
+    transition: background-color 0.2s ease; /* 换颜色的时候有个平滑过渡，不是硬切 */
   }
 
-  main{
+  main {
     max-width: 640px;
     margin: 0 auto;
-    padding: 14vh 28px 12vh;
+    padding: 12vh 28px;
   }
 
-  .mark{
-    font-family: 'Inter', sans-serif;
-    font-size: 13px;
-    letter-spacing: 0.04em;
-    color: var(--blueprint);
-    margin: 0 0 3rem;
+  h1 {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
   }
 
-  h1{
-    font-family: 'Fraunces', serif;
-    font-weight: 500;
-    font-style: italic;
-    font-size: clamp(2.6rem, 7vw, 4rem);
-    line-height: 1.05;
-    letter-spacing: -0.01em;
-    margin: 0 0 1.75rem;
-    color: var(--ink);
+  p {
+    font-size: 1.1rem;
+    line-height: 1.6;
   }
 
-  p{
-    font-size: 1.05rem;
-    max-width: 34em;
-    margin: 0 0 1.4rem;
-    color: var(--ink);
-  }
-
-  .lede{
-    font-size: 1.15rem;
-    color: var(--ink);
-  }
-
-  hr{
-    border: none;
-    border-top: 1px solid var(--rule);
-    margin: 3rem 0;
-    width: 48px;
-  }
-
-  .links{
+  /* 取色器那个小工具条的样式 */
+  .color-tools {
     display: flex;
-    flex-wrap: wrap;
-    gap: 0.4rem 1.6rem;
-    padding: 0;
-    margin: 0;
-    list-style: none;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 4rem;
+    font-size: 0.9rem;
   }
 
-  .links a{
-    color: var(--ink);
-    text-decoration: none;
-    border-bottom: 1px solid var(--rule);
-    padding-bottom: 1px;
-    transition: border-color 0.15s ease, color 0.15s ease;
-  }
-
-  .links a:hover,
-  .links a:focus-visible{
-    color: var(--blueprint);
-    border-color: var(--blueprint);
-  }
-
-  a:focus-visible, button:focus-visible{
-    outline: 2px solid var(--blueprint);
-    outline-offset: 3px;
-  }
-
-  footer{
-    margin-top: 4rem;
-    font-size: 0.85rem;
-    color: var(--blueprint);
-    opacity: 0.7;
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .links a{ transition: none; }
-  }
-
-  @media (max-width: 480px){
-    main{ padding: 10vh 20px 8vh; }
+  #hexInput {
+    width: 100px;
+    padding: 4px 8px;
+    font-family: monospace;
   }
 </style>
 </head>
 <body>
 <main>
-  <p class="mark">Yimmy &mdash; Oakland / San Rafael, CA</p>
 
-  <h1>Design finds its edges<br>where engineering ends.</h1>
+  <!-- 这一小块是取色工具，跟你网站正文内容无关，纯粹是个小工具 -->
+  <div class="color-tools">
+    <label for="colorPicker">背景色:</label>
+    <input type="color" id="colorPicker" value="#ECEAE2">
+    <input type="text" id="hexInput" value="#ECEAE2">
+  </div>
 
-  <p class="lede">
-    I'm an engineer and designer working between mechanical systems and
-    made objects. By day I build medical devices; the rest of the time
-    is Studio Yimmy701 &mdash; industrial design, photography, music, and
-    whatever else needs making.
-  </p>
-
+  <!-- 下面这两块才是你真正的网站内容，自己改这里的文字就行 -->
+  <h1>Yimmy</h1>
   <p>
-    Trained at MIT in mechanical engineering and art &amp; design.
-    Currently based in the Bay Area, occasionally elsewhere.
+    这里写你想说的话。
   </p>
 
-  <hr>
-
-  <ul class="links">
-    <li><a href="mailto:hello@yimmy701.world">Email</a></li>
-    <li><a href="#">Instagram</a></li>
-    <li><a href="#">Studio work</a></li>
-  </ul>
-
-  <footer>yimmy701.world</footer>
 </main>
+
+<script>
+  // 这段JS负责让取色器和背景色联动起来
+
+  const colorPicker = document.getElementById('colorPicker');
+  const hexInput = document.getElementById('hexInput');
+
+  // 当取色器的颜色改变时：更新背景 + 同步更新hex输入框里的文字
+  colorPicker.addEventListener('input', function () {
+    document.body.style.backgroundColor = colorPicker.value;
+    hexInput.value = colorPicker.value;
+  });
+
+  // 当用户直接在hex输入框打字时：如果格式对，更新背景 + 同步取色器
+  hexInput.addEventListener('input', function () {
+    const value = hexInput.value;
+    const isValidHex = /^#[0-9A-Fa-f]{6}$/.test(value);
+    if (isValidHex) {
+      document.body.style.backgroundColor = value;
+      colorPicker.value = value;
+    }
+  });
+</script>
 </body>
 </html>
