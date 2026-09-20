@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Yimmy — Page 2</title>
+<title>Yimmy — ✨</title>
 <style>
   body {
     margin: 0;
@@ -14,10 +14,27 @@
     transition: background-color 0.2s ease;
   }
 
+  nav {
+    display: flex;
+    justify-content: flex-end;
+    gap: 24px;
+    padding: 20px 28px;
+  }
+
+  nav a {
+    color: white;
+    text-decoration: none;
+    font-size: 0.95rem;
+  }
+
+  nav a:hover {
+    opacity: 0.7;
+  }
+
   main {
     max-width: 640px;
     margin: 0 auto;
-    padding: 12vh 28px;
+    padding: 8vh 28px;
     text-align: center;
   }
 
@@ -30,36 +47,21 @@
     font-size: 1.1rem;
     line-height: 1.6;
   }
-
-  a {
-    color: white;
-  }
-
-  nav {
-  display: flex;
-  gap: 24px;
-  padding: 20px 28px;
-  }
-  
-  nav a {
-    color: white;
-    text-decoration: none;   /* 去掉链接默认的下划线 */
-    font-size: 0.95rem;
-  }
-  
-  nav a:hover {
-    opacity: 0.7;   /* 鼠标移上去的时候有点反馈，不是死气沉沉的 */
-  }
 </style>
 </head>
 <body>
-<main>
 
-  <h1>第二页</h1>
-  <p>这里写第二页的内容。</p>
+  <nav>
+    <a href="index.html">Home</a>
+    <a href="sparkle.html">✨</a>
+  </nav>
 
-  <a href="index.html">← Back to home</a>
+  <main>
 
-</main>
+    <h1>第二页</h1>
+    <p>这里写第二页的内容。</p>
+
+  </main>
+
 </body>
 </html>
